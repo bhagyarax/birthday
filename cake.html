@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Animated Mini Birthday Cake with Music</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f7a8b8;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: translateY(-50px) scale(0.8);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(10px) scale(1.05);
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-5px) scale(0.95);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes sway {
+      0%, 100% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+      50% {
+        transform: translateX(-50%) rotate(5deg);
+      }
+    }
+
+    @keyframes flickerGlow {
+      0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 4px 2px gold;
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(-50%) scale(1.2);
+        box-shadow: 0 0 10px 5px orange;
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .cake {
+      position: relative;
+      width: 40px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      animation: bounceIn 1s ease forwards;
+    }
+
+    .cake::before,
+    .cake::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fffacd;
+      border-radius: 50%;
+      top: 10px;
+      opacity: 0;
+      animation: sparkle 2s infinite;
+      box-shadow: 0 0 10px 3px #fffacd;
+    }
+
+    .cake::before {
+      left: -10px;
+      animation-delay: 0s;
+    }
+    .cake::after {
+      right: -10px;
+      animation-delay: 1s;
+    }
+
+    .layer {
+      width: 100%;
+      height: 6px;
+      background: #8B5E3C;
+      border-radius: 1px;
+      margin-bottom: 1px;
+    }
+
+    .frosting {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 10px;
+      background: #fff;
+      border-radius: 6px 6px 0 0;
+      clip-path: polygon(
+        0% 0%, 100% 0%, 100% 40%, 90% 55%,
+        80% 30%, 70% 50%, 60% 35%, 50% 60%, 
+        40% 45%, 30% 70%, 20% 50%, 10% 60%, 
+        0% 40%
+      );
+    }
+
+    .candle {
+      position: absolute;
+      top: -14px;
+      width: 1.5px;
+      height: 10px;
+      background: repeating-linear-gradient(
+        to bottom,
+        white,
+        white 1.5px,
+        red 1.5px,
+        red 3px
+      );
+      border-radius: 1px;
+      transform-origin: bottom center;
+      animation: sway 2s infinite ease-in-out;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .flame {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: gold;
+      border-radius: 50%;
+      box-shadow: 0 0 2px 1px gold;
+      animation: flickerGlow 0.6s infinite alternate;
+    }
+
+    .message {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .message h1 {
+      font-size: 0.8em;
+      color: #834c4c;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .message p {
+      margin: 2px 0 0;
+      font-size: 0.65em;
+      color: #6b3f3f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio with autoplay & loop -->
+  <audio autoplay loop>
+    <source src="https://cdn.jsdelivr.net/gh/anars/blank-audio@master/5-seconds-of-silence.mp3" type="audio/mpeg">
+    <!-- Fallback text -->
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Cake -->
+  <div class="cake">
+    <div class="flame"></div>
+    <div class="candle"></div>
+    <div class="frosting"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+  </div>
+
+  <!-- Message -->
+  <div class="message">
+    <h1>happy birthday!</h1>
+    <p>Lovie</p>
+  </div>
+
+</body>
+</html>
